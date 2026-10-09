@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://cambridgequantum.com/schemas/tket/pytket_config_v1.json",
+    "type": "object",
+    "description": "Configuration file for pytket. Stored at ~/.config/pytket/config.json",
+    "properties": {
+        "extensions": {
+            "type": "object",
+            "description": "Configuration parameters for pytket extension packages."
+        }
+    },
+    "required": [
+        "extensions"
+    ]
+}

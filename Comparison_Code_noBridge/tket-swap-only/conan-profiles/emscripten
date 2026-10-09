@@ -1,0 +1,19 @@
+[settings]
+os=Emscripten
+arch=wasm
+compiler=emcc
+compiler.version=4.0
+compiler.libcxx=libc++
+compiler.cppstd=20
+build_type=Release
+
+[buildenv]
+CC=emcc
+CXX=em++
+AR=emar
+RANLIB=emranlib
+CC_FOR_BUILD=/usr/bin/gcc
+CXX_FOR_BUILD=/usr/bin/g++
+CXXFLAGS=-fwasm-exceptions -fPIC -Wno-error=sign-compare
+CFLAGS=-fPIC
+LDFLAGS=-fwasm-exceptions

@@ -1,0 +1,10 @@
+# These are test-only dependencies.
+
+pytest
+pytest-cov
+pytest-benchmark
+py
+hypothesis
+docker
+jsonschema
+opt_einsum

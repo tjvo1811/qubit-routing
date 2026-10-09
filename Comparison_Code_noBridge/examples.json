@@ -1,0 +1,42 @@
+[
+  {
+    "id": "01",
+    "name": "Four qubits on a line",
+    "description": "An end-to-end CX and a disjoint middle CX, followed by several competing interactions.",
+    "n_qubits": 4,
+    "edges": [[0, 1], [1, 2], [2, 3]],
+    "gates": [[0, 3], [1, 2], [0, 2], [1, 3], [0, 1], [2, 3], [0, 3], [1, 3], [0, 2], [3, 1], [2, 0], [0, 3]],
+    "initial_layout": [0, 1, 2, 3],
+    "positions": [[0, 0], [1, 0], [2, 0], [3, 0]]
+  },
+  {
+    "id": "02",
+    "name": "Four qubits on a star",
+    "description": "Leaf-to-leaf CX gates test how a degree-three hub is used; the physical hub is P1.",
+    "n_qubits": 4,
+    "edges": [[0, 1], [1, 2], [1, 3]],
+    "gates": [[0, 2], [2, 3], [0, 3], [0, 1], [1, 2], [0, 2], [3, 0], [2, 3], [0, 3], [3, 2], [2, 0], [0, 3]],
+    "initial_layout": [0, 1, 2, 3],
+    "positions": [[-1, 0], [0, 0], [1, 0], [0, 1]]
+  },
+  {
+    "id": "03",
+    "name": "Six qubits with a degree-four hub",
+    "description": "Hub qubit 2 (picture node 3) connects to 0, 1, 3, and 5. Qubit 1 also connects to 3, and 3 connects to 4.",
+    "n_qubits": 6,
+    "edges": [[0, 2], [1, 2], [1, 3], [2, 3], [2, 5], [3, 4]],
+    "gates": [[0, 4], [1, 5], [4, 5], [0, 1], [0, 4], [5, 4], [1, 4], [0, 5], [4, 1], [5, 0]],
+    "initial_layout": [0, 1, 2, 3, 4, 5],
+    "positions": [[4, 3], [1, 4], [3, 2], [2, 0], [0, 0], [5, 2]]
+  },
+  {
+    "id": "04",
+    "name": "Six qubits with a degree-five hub",
+    "description": "Leaves 1 and 3 only touch the hub. They alternate with CX gates on the far side, so the two routers insert different numbers of SWAPs.",
+    "n_qubits": 6,
+    "edges": [[0, 2], [0, 5], [1, 2], [2, 3], [2, 4], [2, 5], [4, 5]],
+    "gates": [[1, 3], [1, 3], [5, 1], [0, 4], [0, 3], [0, 1], [4, 0], [3, 0], [0, 4], [5, 3], [1, 3], [0, 4], [5, 1], [4, 0], [3, 1], [0, 3]],
+    "initial_layout": [0, 1, 2, 3, 4, 5],
+    "positions": [[0, 2], [1, 0], [2, 1], [3, 0], [4, 2], [2, 3]]
+  }
+]

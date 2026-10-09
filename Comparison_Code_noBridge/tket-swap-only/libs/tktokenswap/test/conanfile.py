@@ -1,0 +1,66 @@
+# Copyright Quantinuum
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+from typing import ClassVar
+
+from conan import ConanFile
+from conan.errors import ConanInvalidConfiguration
+from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
+
+
+class test_tktokenswapRecipe(ConanFile):
+    name = "test-tktokenswap"
+    version = "0.3.15"
+    package_type = "application"
+    license = "Apache 2"
+    url = "https://github.com/quantinuum/tket"
+    description = "Unit tests for tktokenswap"
+    settings = "os", "compiler", "build_type", "arch"
+    options: ClassVar[dict[str, list[bool]]] = {"with_coverage": [True, False]}
+    default_options: ClassVar[dict[str, bool]] = {"with_coverage": False}
+    exports_sources = "CMakeLists.txt", "src/*"
+
+    def configure(self):
+        if self.options.with_coverage:
+            self.options["tktokenswap"].profile_coverage = True
+
+    def layout(self):
+        cmake_layout(self)
+
+    def generate(self):
+        deps = CMakeDeps(self)
+        deps.generate()
+        tc = CMakeToolchain(self)
+        tc.variables["WITH_COVERAGE"] = self.options.with_coverage
+        tc.generate()
+
+    def validate(self):
+        if self.options.with_coverage and self.settings.compiler != "gcc":
+            raise ConanInvalidConfiguration(
+                "`with_coverage` option only available with gcc"
+            )
+
+    def build(self):
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
+
+    def package(self):
+        cmake = CMake(self)
+        cmake.install()
+
+    def requirements(self):
+        self.requires("tktokenswap/0.3.15")
+        self.requires("tkrng/0.3.5@tket/stable")
+        self.requires("catch2/3.16.0@tket/stable")
